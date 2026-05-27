@@ -8,18 +8,13 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { GradientText } from '@/components/ui/GradientText';
 import { WaitlistSchema, type WaitlistPayload } from '@/lib/types/api';
-
-const ROLE_OPTIONS = [
-  { value: 'caregiver', label: 'Caregiver / Nurse' },
-  { value: 'clinician', label: 'Doctor / Clinician' },
-  { value: 'hospital_admin', label: 'Hospital / Facility Admin' },
-  { value: 'investor', label: 'Investor' },
-  { value: 'other', label: 'Other' },
-] as const;
+import { useLang } from '@/lib/hooks/use-lang';
 
 export function Waitlist() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const { t } = useLang();
+  const wl = t.waitlist;
 
   const {
     register,
@@ -59,14 +54,12 @@ export function Waitlist() {
       <div className="max-w-xl mx-auto">
         <ScrollReveal className="text-center mb-10">
           <p className="text-[#00D4B8] text-sm font-inter font-semibold uppercase tracking-widest mb-3">
-            Join Us
+            {wl.badge}
           </p>
           <h2 className="font-syne font-bold text-4xl sm:text-5xl text-white mb-4">
-            Be part of <GradientText>healthcare</GradientText> that works.
+            {wl.headline} <GradientText>{wl.headlineAccent}</GradientText>
           </h2>
-          <p className="text-white/55 font-inter text-lg">
-            Get early access. Shape the product. Help us prove that proactive healthcare saves lives.
-          </p>
+          <p className="text-white/55 font-inter text-lg">{wl.sub}</p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
@@ -75,30 +68,27 @@ export function Waitlist() {
               <div className="w-16 h-16 rounded-full bg-[#00D4B8]/15 flex items-center justify-center mx-auto mb-5">
                 <span className="text-[#00D4B8] text-3xl">✓</span>
               </div>
-              <h3 className="font-syne font-bold text-white text-xl mb-2">
-                {"You're on the list."}
-              </h3>
-              <p className="text-white/60 font-inter text-sm">
-                {"We'll reach out as we onboard the next wave. Thank you for believing in this."}
-              </p>
+              <h3 className="font-syne font-bold text-white text-xl mb-2">{wl.successTitle}</h3>
+              <p className="text-white/60 font-inter text-sm">{wl.successSub}</p>
             </div>
           ) : (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="card-glass rounded-2xl p-8 flex flex-col gap-5 border border-white/10"
+              className="card-glass rounded-2xl p-5 sm:p-8 flex flex-col gap-5 border border-white/10"
             >
               <div>
                 <Input
                   {...register('email')}
                   type="email"
-                  label="Email address"
-                  placeholder="you@example.com"
+                  label={wl.emailLabel}
+                  placeholder={wl.emailPlaceholder}
                   isRequired
                   isInvalid={!!errors.email}
                   errorMessage={errors.email?.message}
                   classNames={{
                     input: 'font-inter text-white bg-transparent',
-                    inputWrapper: 'bg-white/5 border border-white/10 hover:border-white/20 focus-within:border-[#00D4B8]/50',
+                    inputWrapper:
+                      'bg-white/5 border border-white/10 hover:border-white/20 focus-within:border-[#00D4B8]/50',
                     label: 'text-white/60 font-inter',
                     errorMessage: 'text-red-400 font-inter text-xs',
                   }}
@@ -109,11 +99,12 @@ export function Waitlist() {
                 <Input
                   {...register('name')}
                   type="text"
-                  label="Your name (optional)"
-                  placeholder="Ahmad Aliff"
+                  label={wl.nameLabel}
+                  placeholder={wl.namePlaceholder}
                   classNames={{
                     input: 'font-inter text-white bg-transparent',
-                    inputWrapper: 'bg-white/5 border border-white/10 hover:border-white/20 focus-within:border-[#00D4B8]/50',
+                    inputWrapper:
+                      'bg-white/5 border border-white/10 hover:border-white/20 focus-within:border-[#00D4B8]/50',
                     label: 'text-white/60 font-inter',
                   }}
                 />
@@ -121,20 +112,21 @@ export function Waitlist() {
 
               <div>
                 <Select
-                  label="I am a..."
-                  placeholder="Select your role"
+                  label={wl.roleLabel}
+                  placeholder={wl.rolePlaceholder}
                   onChange={(e) => {
                     const val = e.target.value as WaitlistPayload['role'];
                     if (val) setValue('role', val);
                   }}
                   classNames={{
-                    trigger: 'bg-white/5 border border-white/10 hover:border-white/20 data-[focus=true]:border-[#00D4B8]/50',
+                    trigger:
+                      'bg-white/5 border border-white/10 hover:border-white/20 data-[focus=true]:border-[#00D4B8]/50',
                     label: 'text-white/60 font-inter',
                     value: 'font-inter text-white',
                     popoverContent: 'bg-[#0D1E36] border border-white/10',
                   }}
                 >
-                  {ROLE_OPTIONS.map((opt) => (
+                  {wl.roles.map((opt) => (
                     <SelectItem key={opt.value} className="font-inter text-white/80 hover:text-white">
                       {opt.label}
                     </SelectItem>
@@ -153,12 +145,10 @@ export function Waitlist() {
                 isLoading={status === 'loading'}
                 className="bg-[#00D4B8] text-[#0A1628] font-syne font-bold text-base h-12 w-full glow-mint hover:bg-[#00B89E] transition-all duration-200"
               >
-                {status === 'loading' ? 'Joining...' : 'Join the Waitlist'}
+                {status === 'loading' ? wl.submitLoading : wl.submitIdle}
               </Button>
 
-              <p className="text-white/30 font-inter text-xs text-center">
-                No spam. No fluff. Just updates when it matters.
-              </p>
+              <p className="text-white/30 font-inter text-xs text-center">{wl.noSpam}</p>
             </form>
           )}
         </ScrollReveal>

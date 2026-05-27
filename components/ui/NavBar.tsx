@@ -2,18 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@heroui/react';
-
-const navLinks = [
-  { href: '#problem', label: 'Problem' },
-  { href: '#solution', label: 'Solution' },
-  { href: '#preview', label: 'Preview' },
-  { href: '#pilot', label: 'Pilot' },
-  { href: '#team', label: 'Team' },
-];
+import { LangToggle } from '@/components/ui/LangToggle';
+import { useLang } from '@/lib/hooks/use-lang';
 
 export function NavBar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useLang();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -36,7 +31,7 @@ export function NavBar() {
           </a>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {t.nav.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -47,14 +42,15 @@ export function NavBar() {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-3">
+            <LangToggle />
             <Button
               as="a"
               href="#waitlist"
               size="sm"
               className="bg-[#00D4B8] text-[#0A1628] font-semibold hover:bg-[#00B89E] transition-colors"
             >
-              Join Waitlist
+              {t.nav.cta}
             </Button>
           </div>
 
@@ -65,9 +61,19 @@ export function NavBar() {
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
             </svg>
           </button>
@@ -76,7 +82,7 @@ export function NavBar() {
         {menuOpen && (
           <div className="md:hidden py-4 border-t border-white/10">
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
+              {t.nav.links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -86,15 +92,18 @@ export function NavBar() {
                   {link.label}
                 </a>
               ))}
-              <Button
-                as="a"
-                href="#waitlist"
-                size="sm"
-                className="bg-[#00D4B8] text-[#0A1628] font-semibold w-fit"
-                onClick={() => setMenuOpen(false)}
-              >
-                Join Waitlist
-              </Button>
+              <div className="flex items-center justify-between pt-1">
+                <LangToggle />
+                <Button
+                  as="a"
+                  href="#waitlist"
+                  size="sm"
+                  className="bg-[#00D4B8] text-[#0A1628] font-semibold"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t.nav.cta}
+                </Button>
+              </div>
             </div>
           </div>
         )}

@@ -26,15 +26,15 @@ export function VitalsPanel({ resident }: VitalsPanelProps) {
 
   return (
     <div className="flex flex-col gap-4 h-full">
-      <div className="flex items-start justify-between">
-        <div>
-          <h3 className="font-syne font-semibold text-white text-lg">{name}</h3>
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h3 className="font-syne font-semibold text-white text-lg truncate">{name}</h3>
           <p className="text-white/50 text-sm font-inter">
             Age {age} · Room {room}
           </p>
         </div>
         <span
-          className="text-xs font-semibold font-inter px-2.5 py-1 rounded-full"
+          className="text-xs font-semibold font-inter px-2.5 py-1 rounded-full flex-shrink-0 text-center"
           style={{
             color: statusColor[status],
             backgroundColor: `${statusColor[status]}18`,

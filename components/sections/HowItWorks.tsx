@@ -1,19 +1,22 @@
+'use client';
+
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { GradientText } from '@/components/ui/GradientText';
-import { SITE_CONFIG } from '@/lib/constants/site-config';
+import { useLang } from '@/lib/hooks/use-lang';
 
 export function HowItWorks() {
-  const steps = SITE_CONFIG.howItWorks.steps;
+  const { t } = useLang();
+  const h = t.howItWorks;
 
   return (
     <SectionWrapper id="how-it-works" className="bg-[#0A1628]">
       <ScrollReveal>
         <p className="text-[#00D4B8] text-sm font-inter font-semibold uppercase tracking-widest mb-3">
-          How It Works
+          {h.badge}
         </p>
         <h2 className="font-syne font-bold text-4xl sm:text-5xl text-white mb-16 max-w-2xl">
-          Four steps. <GradientText>One loop.</GradientText> Every life covered.
+          {h.headline} <GradientText>{h.headlineAccent}</GradientText>
         </h2>
       </ScrollReveal>
 
@@ -22,7 +25,7 @@ export function HowItWorks() {
         <div className="hidden lg:block absolute top-10 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#00D4B8]/30 to-transparent" />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, i) => (
+          {h.steps.map((step, i) => (
             <ScrollReveal key={step.number} direction="up" delay={i * 0.1}>
               <div className="relative flex flex-col gap-4">
                 <div className="flex items-center gap-4 lg:flex-col lg:items-start">
@@ -42,8 +45,8 @@ export function HowItWorks() {
                   </p>
                 </div>
 
-                {i < steps.length - 1 && (
-                  <div className="lg:hidden absolute left-7 top-16 w-px h-8 bg-gradient-to-b from-[#00D4B8]/30 to-transparent" />
+                {i < h.steps.length - 1 && (
+                  <div className="sm:hidden absolute left-7 top-16 w-px h-8 bg-gradient-to-b from-[#00D4B8]/30 to-transparent" />
                 )}
               </div>
             </ScrollReveal>
@@ -58,12 +61,8 @@ export function HowItWorks() {
             <span className="text-[#00D4B8] text-xl">↺</span>
           </div>
           <div>
-            <p className="font-syne font-semibold text-white">
-              This loop never stops — it runs 24/7 for every resident.
-            </p>
-            <p className="text-white/50 font-inter text-sm mt-1">
-              From a single resident to 100+, the architecture scales without change.
-            </p>
+            <p className="font-syne font-semibold text-white">{h.loopNote}</p>
+            <p className="text-white/50 font-inter text-sm mt-1">{h.loopSub}</p>
           </div>
         </div>
       </ScrollReveal>
