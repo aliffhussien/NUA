@@ -1,0 +1,1 @@
+export { mockResidents } from './residents';
