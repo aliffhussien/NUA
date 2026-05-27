@@ -74,7 +74,7 @@ export function Waitlist() {
           ) : (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="card-glass rounded-2xl p-8 flex flex-col gap-5 border border-white/10"
+              className="card-glass rounded-2xl p-5 sm:p-8 flex flex-col gap-5 border border-white/10"
             >
               <div>
                 <Input

@@ -21,7 +21,7 @@ export function Problem() {
           <br />
           <GradientText>{p.headlineAccent}</GradientText>
         </h2>
-        <p className="text-white/50 font-inter text-lg leading-relaxed max-w-2xl mb-16 italic">
+        <p className="text-white/50 font-inter text-lg leading-relaxed max-w-2xl mb-10 sm:mb-16 italic">
           {p.story}
         </p>
       </ScrollReveal>

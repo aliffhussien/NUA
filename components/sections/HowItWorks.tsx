@@ -46,7 +46,7 @@ export function HowItWorks() {
                 </div>
 
                 {i < h.steps.length - 1 && (
-                  <div className="lg:hidden absolute left-7 top-16 w-px h-8 bg-gradient-to-b from-[#00D4B8]/30 to-transparent" />
+                  <div className="sm:hidden absolute left-7 top-16 w-px h-8 bg-gradient-to-b from-[#00D4B8]/30 to-transparent" />
                 )}
               </div>
             </ScrollReveal>

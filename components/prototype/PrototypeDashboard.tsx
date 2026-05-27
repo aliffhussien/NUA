@@ -51,9 +51,9 @@ export function PrototypeDashboard() {
         )}
       </div>
 
-      <div className="flex flex-col md:flex-row" style={{ minHeight: '420px' }}>
+      <div className="flex flex-col md:flex-row md:min-h-[420px]">
         {/* Resident list */}
-        <div className="md:w-64 lg:w-72 border-b md:border-b-0 md:border-r border-white/10 p-3 flex flex-col gap-2 overflow-y-auto max-h-64 md:max-h-none">
+        <div className="md:w-64 lg:w-72 border-b md:border-b-0 md:border-r border-white/10 p-3 flex flex-col gap-2 overflow-y-auto max-h-80 md:max-h-none">
           <p className="text-white/30 text-xs font-inter uppercase tracking-widest px-2 pt-1 pb-1">
             Residents
           </p>

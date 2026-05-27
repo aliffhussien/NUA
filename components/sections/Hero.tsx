@@ -40,7 +40,7 @@ export function Hero() {
         </motion.div>
 
         <motion.h1
-          className="font-syne font-bold text-5xl sm:text-6xl lg:text-7xl text-white leading-[1.1] tracking-tight mb-6"
+          className="font-syne font-bold text-4xl sm:text-5xl lg:text-7xl text-white leading-[1.1] tracking-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}

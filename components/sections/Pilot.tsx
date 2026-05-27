@@ -25,7 +25,7 @@ export function Pilot() {
             {p.description}
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3">
             {p.stats.map((stat) => (
               <div key={stat.label} className="card-glass rounded-xl px-5 py-4 text-center">
                 <p className="font-syne font-bold text-3xl text-white mb-1">{stat.value}</p>
